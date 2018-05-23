@@ -60,7 +60,8 @@ def prep(step, workdir, db, bound_lower, bound_upper):
 
         avg_score = avg_score / ctr
 
-        logging.info("Wrote {0} lines with min score {1}, max score {2}, avg score {3}".format(ctr, min_score, max_score, avg_score))
+        logging.info(
+            'Wrote {0} lines with min score {1}, max score {2}, avg score {3}'.format(ctr, min_score, max_score, avg_score))
         source.close()
         target.close()
         scores.close()

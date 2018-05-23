@@ -7,6 +7,7 @@ Start-stop training wrapper for Sockeye
 import argparse
 import logging
 import os
+import subprocess
 
 from newspaper.corpus import prep
 from newspaper.database import create_database, populate_db
@@ -28,6 +29,7 @@ def main():
     parser.add_argument("--bound-lower", help="starting lower bound of score", default=0.8)
     parser.add_argument("--bound-upper", help="starting upper bound of score", default=1.0)
     parser.add_argument("--bound-step",  help="amount to move score per step", default=0.2)
+    parser.add_argument("--train-epochs", help="number of epochs to train", default=10)
     args = parser.parse_args()
 
     # run info
@@ -62,6 +64,8 @@ def main():
         # adjust params for next step
         bound_upper -= bound_step
         bound_lower -= bound_step
+
+        engine.train(step, args.work_dir, args.train_epochs)
 
 
 if __name__ == "__main__":
