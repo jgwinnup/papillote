@@ -44,7 +44,7 @@ def prep(step, workdir, db, bound_lower, bound_upper):
                 #writes
                 source.writelines(row[1])
                 target.writelines(row[2])
-                scoreline = "{0} {1}".format(row[0], row[3])
+                scoreline = '{0} {1}\n'.format(row[0], row[3])
                 scores.writelines(scoreline)
 
                 #maths
