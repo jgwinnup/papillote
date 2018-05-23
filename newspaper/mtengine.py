@@ -43,6 +43,7 @@ class SockeyeEngine(MTEngine):
         # get current working directory so we don't hose paths when switching to work dir
         cwd = os.getcwd()
 
+        step_dir = '{0}/step{1}'.format(work_dir, step)
         valid_source = '{0}/{1}'.format(cwd, rel_valid_source)
         valid_target = '{0}/{1}'.format(cwd, rel_valid_target)
 
@@ -58,7 +59,7 @@ class SockeyeEngine(MTEngine):
         print(" ".join(cmd))
 
         # change to working dir
-        with cd(work_dir):
+        with cd(step_dir):
             print("cwd now: {0}".format(os.getcwd()))
             subprocess.call(cmd)
 
