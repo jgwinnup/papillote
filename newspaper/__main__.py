@@ -30,6 +30,8 @@ def main():
     parser.add_argument("--bound-upper", help="starting upper bound of score", default=1.0)
     parser.add_argument("--bound-step",  help="amount to move score per step", default=0.2)
     parser.add_argument("--train-epochs", help="number of epochs to train", default=10)
+    parser.add_argument("--train-valid-source", help="Training validation source")
+    parser.add_argument("--train-valid-target", help="Training validation target")
     args = parser.parse_args()
 
     # run info
@@ -65,7 +67,8 @@ def main():
         bound_upper -= bound_step
         bound_lower -= bound_step
 
-        engine.train(step, args.work_dir, args.train_epochs)
+        engine.train(step, args.work_dir, args.train_epochs,
+                    args.train_valid_source, args.train_valid_target)
 
 
 if __name__ == "__main__":
