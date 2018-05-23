@@ -49,8 +49,8 @@ class SockeyeEngine(MTEngine):
         # build executable string
         # why does python need a command as an array of strings?
         cmd = ["python", "-m",  "sockeye.train",
-               "--source ", "source",
-               "--target ", "target",
+               "--source", "source",
+               "--target", "target",
                "--validation-source", valid_source,
                "--validation-target", valid_target,
                "--output", "model"]
