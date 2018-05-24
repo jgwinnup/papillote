@@ -64,7 +64,8 @@ def main():
     for step in range(1, args.steps):
         prep(step, args.work_dir, db, bound_lower, bound_upper)
         # adjust params for next step
-        bound_upper -= bound_step
+        # Keep upper bound same for now - 'widen window'
+        # bound_upper -= bound_step
         bound_lower -= bound_step
 
         engine.train(step, args.work_dir, args.train_epochs,
