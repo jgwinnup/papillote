@@ -46,6 +46,7 @@ def populate_db(db, sourcefile, targetfile, scorefile):
         logging.warning("Danger! %s" % e.strerror)
 
     logging.info("Inserted %s sentence pairs" % ctr)
+    return ctr
 
 
 def query_corpus(db, bound_lower, bound_upper):

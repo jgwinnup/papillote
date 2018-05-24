@@ -32,6 +32,7 @@ def main():
     parser.add_argument("--train-epochs", help="number of epochs to train", default=10)
     parser.add_argument("--train-valid-source", help="Training validation source")
     parser.add_argument("--train-valid-target", help="Training validation target")
+    parser.add_argument("--fill-corpus", help="Fill sub corpus by repeating to orig. size", default=True)
     args = parser.parse_args()
 
     # run info
@@ -40,10 +41,6 @@ def main():
     for arg in vars(args):
         logging.info("{0}: {1}".format(arg, getattr(args, arg)))
 
-    # create + populate database
-    db = create_database(args.db)
-    populate_db(db, args.source, args.target, args.scores)
-
     # create working dir if not exists
     directory = args.work_dir
     if not os.path.exists(directory):
@@ -51,6 +48,10 @@ def main():
         logging.info("Creating work dir %s" % args.work_dir)
     else:
         logging.warning("Work dir %s already exists!" % args.work_dir)
+
+    # create + populate database
+    db = create_database(args.db)
+    corpus_size = populate_db(db, args.source, args.target, args.scores)
 
     # convenience variables to iterate over
     bound_upper = args.bound_upper
@@ -61,7 +62,9 @@ def main():
 
     engine = SockeyeEngine()
 
-    for step in range(1, args.steps):
+    # start from zero to match epoch numbering
+
+    for step in range(0, args.steps):
         prep(step, args.work_dir, db, bound_lower, bound_upper)
         # adjust params for next step
         # Keep upper bound same for now - 'widen window'

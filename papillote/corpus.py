@@ -7,7 +7,7 @@ import os
 from papillote.database import query_corpus
 
 
-def prep(step, workdir, db, bound_lower, bound_upper):
+def prep(step, workdir, db, bound_lower, bound_upper, fill=0):
 
     stepdir = "{0}/step{1}".format(workdir, step)
 
@@ -21,6 +21,11 @@ def prep(step, workdir, db, bound_lower, bound_upper):
         logging.warning("Work dir %s already exists!" % stepdir)
 
     corpus = query_corpus(db, bound_lower, bound_upper)
+
+    # optionally fill corpus to original size by repeating
+    if fill != 0:
+        logging.info('Filling corpus with {0} more lines'.format('0'))
+
 
     # 0 - orig row id
     # 1 - source sent
