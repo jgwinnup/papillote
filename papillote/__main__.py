@@ -64,8 +64,14 @@ def main():
 
     # start from zero to match epoch numbering
 
+    if args.fill_corpus:
+        fill_corpus_size = corpus_size
+    else:
+        fill_corpus_size = 0
+
     for step in range(0, args.steps):
-        prep(step, args.work_dir, db, bound_lower, bound_upper)
+
+        prep(step, args.work_dir, db, bound_lower, bound_upper, fill_corpus_size)
         # adjust params for next step
         # Keep upper bound same for now - 'widen window'
         # bound_upper -= bound_step

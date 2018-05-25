@@ -24,7 +24,8 @@ def prep(step, workdir, db, bound_lower, bound_upper, fill=0):
 
     # optionally fill corpus to original size by repeating
     if fill != 0:
-        logging.info('Filling corpus with {0} more lines'.format('0'))
+        fill_delta = fill - len(corpus)
+        logging.info('Filling corpus with {0} more lines'.format(fill_delta))
 
 
     # 0 - orig row id
