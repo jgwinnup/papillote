@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--train-epochs", help="number of epochs to train", default=10)
     parser.add_argument("--train-valid-source", help="Training validation source")
     parser.add_argument("--train-valid-target", help="Training validation target")
-    parser.add_argument("--fill-corpus", help="Fill sub corpus by repeating to orig. size", default=True)
+    parser.add_argument("--fill-corpus", help="Fill sub corpus by repeating to orig. size", default=False)
     args = parser.parse_args()
 
     # run info
