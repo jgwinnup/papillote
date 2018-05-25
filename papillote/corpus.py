@@ -1,6 +1,6 @@
-'''
+"""
 Corpus methods
-'''
+"""
 import logging
 import os
 
@@ -11,7 +11,7 @@ def prep(step, workdir, db, bound_lower, bound_upper, fill=0):
 
     stepdir = "{0}/step{1}".format(workdir, step)
 
-    logging.info("Preparing corpus for step {0} in {1}".format(step , stepdir))
+    logging.info("Preparing corpus for step {0} in {1}".format(step, stepdir))
 
     # make working directory
     if not os.path.exists(stepdir):
@@ -26,7 +26,6 @@ def prep(step, workdir, db, bound_lower, bound_upper, fill=0):
     if fill != 0:
         fill_delta = fill - len(corpus)
         logging.info('Filling corpus with {0} more lines'.format(fill_delta))
-
 
     # 0 - orig row id
     # 1 - source sent
@@ -45,15 +44,15 @@ def prep(step, workdir, db, bound_lower, bound_upper, fill=0):
     try:
         with open(sourcefile, 'w') as source, open(targetfile, 'w') as target, open(scorefile, 'w') as scores:
             for row in corpus:
-                #print("id %s: score: %s" % (row[0], row[3]))
+                # print("id %s: score: %s" % (row[0], row[3]))
 
-                #writes
+                # writes
                 source.writelines(row[1])
                 target.writelines(row[2])
                 scoreline = '{0} {1}\n'.format(row[0], row[3])
                 scores.writelines(scoreline)
 
-                #maths
+                # maths
                 score = row[3]
                 avg_score += score
                 if score < min_score:
@@ -61,8 +60,9 @@ def prep(step, workdir, db, bound_lower, bound_upper, fill=0):
                 elif score > max_score:
                     max_score = score
 
-
                 ctr += 1
+
+            # check fill delta
 
         avg_score = avg_score / ctr
 
