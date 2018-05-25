@@ -55,7 +55,7 @@ class SockeyeEngine(MTEngine):
                "--validation-source", valid_source,
                "--validation-target", valid_target,
                "--output", "model",
-               "--max-num-epochs", train_epochs]
+               "--max-num-epochs", str(train_epochs)]
 
         print(" ".join(cmd))
 
